@@ -32,7 +32,7 @@ curl -SL https://github.com/docker/compose/releases/download/v2.29.6/docker-comp
 </details>
 
 > [!NOTE]
-> Para poder instalar el plugin mediante los repositorios de Ubuntu, es necesario haber instalado Docker a través de estos
+> Para poder instalar el plugin mediante los repositorios de Ubuntu, tambien es necesario haber instalado Docker a través de los repositorios oficiales
 
 <details>
  <summary>Comprobación</summary>
@@ -51,7 +51,24 @@ docker compose version
 ## Creación de archivo compose.yml
 
 <details>
- <summary>Comprobación</summary>
+ <summary>Crear carpeta y archivo</summary>
+<br>
+
+```bash
+# Montar una carpeta para almacenar el archivo compose.yml
+mkdir composePS
+
+# Colocarse en la carpeta recien creada
+cd composePS
+
+# Creación del archivo compose.yml
+nano docker-compose.yml
+```
+ 
+</details>
+
+<details>
+ <summary>Archivos</summary>
 <br>
 
 ```bash
@@ -59,7 +76,7 @@ services:
 
  db:
    image: mariadb
-   restart: always
+   restart: no
    environment:
      MYSQL_ROOT_PASSWORD: admin
      MYSQL_DATABASE: prestashop
@@ -74,7 +91,7 @@ services:
    image: prestashop/prestashop:8-apache
    ports:
      - "7080:80"
-   restart: always
+   restart: no
    environment:
      DB_HOST: db
      DB_USER: userPS
