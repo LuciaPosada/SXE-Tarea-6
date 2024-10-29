@@ -36,3 +36,40 @@ docker compose version
 
 </details>
 
+</details>
+
+## Creación de archivo compose.yml
+
+<details>
+ <summary>Comprobación</summary>
+<br>
+
+```bash
+services:
+
+ db:
+   image: mariadb
+   restart: always
+   environment:
+     MYSQL_ROOT_PASSWORD: admin
+     MYSQL_DATABASE: prestashop
+     MYSQL_USER: userPS
+     MYSQL_PASSWORD: pwdPS
+   ports:
+     - "3306:3306"
+
+ prestashop:
+   depends_on:
+     - db
+   image: prestashop/prestashop:8-apache
+   ports:
+     - "7080:80"
+   restart: always
+   environment:
+     DB_HOST: db
+     DB_USER: userPS
+     DB_PASSWORD: pwdPS
+     DB_NAME: prestashop
+```
+
+</details>
