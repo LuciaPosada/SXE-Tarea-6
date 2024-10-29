@@ -10,17 +10,29 @@
  <summary>Descarga e Instalacion</summary>
 <br>
 
+- Instalación mediante repositorio
+  
 ```bash
-# Instalación mediante repositorio
 sudo apt install docker-compose
+```
 
-# Instalación manual
+- Instalación manual
+  
+```bash
+# Define la ubicación de la configuracion de Docker
 DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+
+# Crea la carpeta cli-plugins en el directorio de configuración de Docker
 mkdir -p $DOCKER_CONFIG/cli-plugins
+
+# Descarga la versión mas reciente de compose
 curl -SL https://github.com/docker/compose/releases/download/v2.29.6/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
 ```
- 
+---
 </details>
+
+> [!NOTE]
+> Para poder instalar el plugin mediante los repositorios de Ubuntu, es necesario haber instalado Docker a través de estos
 
 <details>
  <summary>Comprobación</summary>
@@ -30,11 +42,9 @@ curl -SL https://github.com/docker/compose/releases/download/v2.29.6/docker-comp
 docker compose version
 ```
 
->imagen aqui
+![Comprobación de Compose](/img/Comprobación_Compose.png)
 
 >Salida por consola esperada ↑
-
-</details>
 
 </details>
 
