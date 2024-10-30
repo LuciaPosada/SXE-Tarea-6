@@ -4,8 +4,6 @@
 
 ## Instalación de Docker Compose 
 
->nota aquí
-
 <details>
  <summary>Descarga e Instalacion</summary>
 <br>
@@ -42,9 +40,9 @@ curl -SL https://github.com/docker/compose/releases/download/v2.29.6/docker-comp
 docker compose version
 ```
 
-![Comprobación de Compose](/img/Comprobación_Compose.png)
+>Salida por consola esperada ↓
 
->Salida por consola esperada ↑
+![Comprobación de Compose](/img/Comprobación_Compose.png)
 
 </details>
 
@@ -68,7 +66,7 @@ nano docker-compose.yml
 </details>
 
 <details>
- <summary>Archivos</summary>
+ <summary>Ejemplos de archivos</summary>
 <br>
 
 <details>
@@ -80,7 +78,6 @@ services:
 
  db:
    image: mariadb
-   restart: no
    environment:
      MYSQL_ROOT_PASSWORD: admin
      MYSQL_DATABASE: prestashop
@@ -93,7 +90,6 @@ services:
    image: prestashop/prestashop:8-apache
    ports:
      - "7080:80"
-   restart: no
 ```
 
 </details>
@@ -114,7 +110,7 @@ services:
       - "8080:80"
     depends_on:
       - mysql
-    restart: no
+    restart: unless-stopped
     networks:
       - prestashop-network
 
@@ -127,7 +123,7 @@ services:
       - MYSQL_PASSWORD=pwdPS
     volumes:
       - db_datos:/var/lib/mysql
-    restart: no
+    restart: unless-stopped
     ports:
       - "8000:3306"
     networks:
@@ -148,12 +144,22 @@ networks:
 ## Manejo de los contenedores 
 
 <details>
- <summary>Creación</summary>
+ <summary>Crear</summary>
 <br>
 
 ```bash
+# Ejecución en segundo plano (deja libre la terminal)
 docker compose up -d
+
+# Ejecución en primer plano  (muestra el log de los contenedores)
+docker compose up 
 ```
+
+> Ejemplos de salida por consola tras ejecutar el comando ↓
+
+![Composer_Up_Ejemplo](/img/Composer_Up_Basico.png)
+
+![Composer_Up_Ejemplo](/img/Composer_Up_Completo.png)
 
 </details>
 
@@ -175,4 +181,9 @@ docker compose stop
 docker compose down
 ```
 
+---
 </details>
+
+> [!NOTE]
+> Es necesario situarse en el directorio donde se encuentra el archivo docker-compose.yml para ejecutar los comandos
+
