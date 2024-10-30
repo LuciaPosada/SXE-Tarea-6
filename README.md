@@ -1,4 +1,4 @@
-# Taera 6
+# Tarea 6
 
 >explicacion
 
@@ -71,6 +71,10 @@ nano docker-compose.yml
  <summary>Archivos</summary>
 <br>
 
+<details>
+ <summary>Basico</summary>
+<br>
+
 ```bash
 services:
 
@@ -82,8 +86,6 @@ services:
      MYSQL_DATABASE: prestashop
      MYSQL_USER: userPS
      MYSQL_PASSWORD: pwdPS
-   ports:
-     - "3306:3306"
 
  prestashop:
    depends_on:
@@ -92,11 +94,85 @@ services:
    ports:
      - "7080:80"
    restart: no
-   environment:
-     DB_HOST: db
-     DB_USER: userPS
-     DB_PASSWORD: pwdPS
-     DB_NAME: prestashop
+```
+
+</details>
+
+<details>
+ <summary>Completo</summary>
+<br>
+
+```bash                                                                
+services:
+  prestashop:
+    image: prestashop/prestashop:latest
+    environment:
+      - PS_DEV_MODE="1"
+      - PS_INSTALL_AUTO="1"
+      - DB_SERVER=mysql
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    restart: no
+    networks:
+      - prestashop-network
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=prestashop
+      - MYSQL_USER=userPS
+      - MYSQL_PASSWORD=pwdPS
+    volumes:
+      - db_datos:/var/lib/mysql
+    restart: no
+    ports:
+      - "8000:3306"
+    networks:
+      - prestashop-network
+
+volumes:
+  db_datos:
+
+networks:
+  prestashop-network:
+```
+
+</details>
+
+---
+</details>
+
+## Manejo de los contenedores 
+
+<details>
+ <summary>Creación</summary>
+<br>
+
+```bash
+docker compose up -d
+```
+
+</details>
+
+<details>
+ <summary>Detener</summary>
+<br>
+
+```bash
+docker compose stop
+```
+
+</details>
+
+<details>
+ <summary>Eliminar</summary>
+<br>
+
+```bash
+docker compose down
 ```
 
 </details>
