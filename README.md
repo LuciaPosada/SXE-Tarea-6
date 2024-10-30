@@ -1,11 +1,11 @@
 # Tarea 6
 
->explicacion
+En este documento  se especifican los pasos a seguir para la instalación y uso de Docker Compose para la implementación de Prestashop.
 
 ## Instalación de Docker Compose 
 
 <details>
- <summary>Descarga e Instalacion</summary>
+ <summary>Descarga e Instalación</summary>
 <br>
 
 - Instalación mediante repositorio
@@ -262,3 +262,5 @@ http://<ip>:<puerto_prestashop>/<nuevoNombreCarpetaAdmin>
 ![Comprobacion_BackOffice](/img/Comprobacion_PrestaShop_2.png)
 
 </details>
+
+## Apuntes finales
