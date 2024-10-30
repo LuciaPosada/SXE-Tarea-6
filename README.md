@@ -62,8 +62,12 @@ cd composePS
 # Creación del archivo compose.yml
 nano docker-compose.yml
 ```
- 
+
+ ---
 </details>
+
+> [!IMPORTANT]
+> La instalación de un servicio de Prestashop requiere obligatoriamente el uso de un servicio de bases de datos
 
 <details>
  <summary>Ejemplos de archivos</summary>
@@ -73,23 +77,29 @@ nano docker-compose.yml
  <summary>Basico</summary>
 <br>
 
+El siguiente documento muestra la configuración básica para un servicio de Prestashop:
+
 ```bash
 services:
 
  db:
-   image: mariadb
+   image: mariadb                               # Especificación de version para la imagen de MariaDB
+   container_name: mdb_ps_1                     # Definición de nombre del contenedor
    environment:
-     MYSQL_ROOT_PASSWORD: admin
-     MYSQL_DATABASE: prestashop
-     MYSQL_USER: userPS
-     MYSQL_PASSWORD: pwdPS
+     MYSQL_ROOT_PASSWORD: admin                 # Contraseña del usuario root
+     MYSQL_DATABASE: prestashop                 # Nombre de la base de datos 
+     MYSQL_USER: userPS                         # Nombre de usuario de la base de datos 
+     MYSQL_PASSWORD: pwdPS                      # Contraseña para el usuario
 
  prestashop:
    depends_on:
-     - db
-   image: prestashop/prestashop:8-apache
+     - db                                       # Establecimiento de dependencia a la base de datos
+   image: prestashop/prestashop:8-apache        # Especificación de version para la imagen de Prestashop
+   container_name: cnt_ps_1                     # Definición de nombre del contenedor
    ports:
-     - "7080:80"
+     - "7080:80"                                # Especificación de puerto para el servicio
+   environment:
+     DB_SERVER: db                              # Especificación de la base de datos a usar
 ```
 
 </details>
@@ -98,9 +108,11 @@ services:
  <summary>Completo</summary>
 <br>
 
+Aun que mas completa que la anterior configuración, Prestashop se beneficiaria de otros servicios como phpMyAdmin.
+                                               
 ```bash                                                                
 services:
-  prestashop:
+  prestashop:                                   
     image: prestashop/prestashop:latest         # Especificación de version para la imagen de Prestashop
     environment:
       - PS_DEV_MODE="1"                         # Activación de el modo de desarrollo
