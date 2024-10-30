@@ -187,3 +187,78 @@ docker compose down
 > [!NOTE]
 > Es necesario situarse en el directorio donde se encuentra el archivo docker-compose.yml para ejecutar los comandos
 
+## Instalación de Prestashop
+
+<details>
+ <summary>Acceder a Prestashop</summary>
+<br>
+
+```bash
+http://<ip>:<puerto_prestashop>
+```
+
+> La página resultante deberia ser las siguiente ↓
+
+![Instalación_1](/img/Install_PrestaShop_1.png)
+
+</details>
+
+<details>
+ <summary>Configurar parametros de instalación</summary>
+<br>
+
+- Rellenar la información pertinente
+ 
+![Instalación_2](/img/Install_PrestaShop_2.png)
+
+- Configurar la base de datos
+ 
+![Instalación_1](/img/Install_PrestaShop_3.png)
+
+> Alternativamente se puede utilizar la ip y el puerto del contenedor que contenga la base de datos ↓
+  
+![Configuracion_Alt](/img/Install_PrestaShop_3_Aux_1.png)
+
+</details>
+
+<details>
+ <summary>Obtener acceso al BackOffice la tienda</summary>
+<br>
+ 
+Para poder acceder al "BackOffice" (la interfaz usada por el comercial) de Prestashop es necesario realizar los siguiente pasos por consola para garantizar la seguridad:
+
+```bash
+# Eliminar la carpeta install 
+docker exec -it <nombre|id contenedorPrestashop> rm -rf /var/www/html/install
+
+# Renombrar la carpeta admin
+docker exec -it <nombre|id contenedorPrestashop> mv /var/www/html/admin /var/www/html/<nuevoNombre>
+```
+
+> Ejemplo de uso ↓
+
+![Instalación_2](/img/Terminar_Backend.png)
+
+</details>
+
+<details>
+ <summary>Comprobación Final</summary>
+<br>
+
+```bash
+http://<ip>:<puerto_prestashop>
+```
+ 
+> Comprobación FrontIffice ↓
+
+![Comprobacion_FrontIffice](/img/Comprobacion_PrestaShop_1.png)
+
+```bash
+http://<ip>:<puerto_prestashop>/<nuevoNombreCarpetaAdmin>
+```
+
+> Comprobación BackIffice ↓
+
+![Comprobacion_BackOffice](/img/Comprobacion_PrestaShop_2.png)
+
+</details>
