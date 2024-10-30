@@ -101,39 +101,39 @@ services:
 ```bash                                                                
 services:
   prestashop:
-    image: prestashop/prestashop:latest
+    image: prestashop/prestashop:latest         # Especificación de version para la imagen de Prestashop
     environment:
-      - PS_DEV_MODE="1"
-      - PS_INSTALL_AUTO="1"
-      - DB_SERVER=mysql
+      - PS_DEV_MODE="1"                         # Activación de el modo de desarrollo
+      - PS_INSTALL_AUTO="1"                     # Instalación automatica
+      - DB_SERVER=mysql                         # Especificación de la base de datos a usar
     ports:
-      - "8080:80"
+      - "8080:80"                               # Especificación de puerto para el servicio
     depends_on:
-      - mysql
-    restart: unless-stopped
+      - mysql                                   # Establecimiento de dependencia a la base de datos
+    restart: unless-stopped                     # Especificación de reinicio (automático, a menos que el contenedor se detenga a mano)
     networks:
-      - prestashop-network
+      - prestashop-network                      # Especificación de red interna
 
   mysql:
-    image: mysql:5.7
+    image: mysql:5.7                            # Especificación de version para la imagen de MySQL
     environment:
-      - MYSQL_ROOT_PASSWORD=admin
-      - MYSQL_DATABASE=prestashop
-      - MYSQL_USER=userPS
-      - MYSQL_PASSWORD=pwdPS
+      - MYSQL_ROOT_PASSWORD=admin               # Contraseña del usuario root
+      - MYSQL_DATABASE=prestashop               # Nombre de la base de datos 
+      - MYSQL_USER=userPS                       # Nombre de usuario de la base de datos 
+      - MYSQL_PASSWORD=pwdPS                    # Contraseña para el usuario
     volumes:
-      - db_datos:/var/lib/mysql
+      - db_datos:/var/lib/mysql                 # Especificación de un volumen 
     restart: unless-stopped
     ports:
-      - "8000:3306"
+      - "8000:3306"                             # Especificación de puerto para el servicio DB
     networks:
-      - prestashop-network
+      - prestashop-network                      # Especificación de red interna
 
 volumes:
-  db_datos:
+  db_datos:                                     # Creación de un volumen persistente
 
 networks:
-  prestashop-network:
+  prestashop-network:                           # Creación de un red de Docker
 ```
 
 </details>
@@ -262,5 +262,3 @@ http://<ip>:<puerto_prestashop>/<nuevoNombreCarpetaAdmin>
 ![Comprobacion_BackOffice](/img/Comprobacion_PrestaShop_2.png)
 
 </details>
-
-## Apuntes finales
